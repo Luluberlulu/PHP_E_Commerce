@@ -6,9 +6,31 @@ $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
+    $oldPassword = $_POST['old_password'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm_password'];
     //vérifie mdps match et hash le nouveau mdp avant de l'update dans la bdd
+
+    $hashedPassword = $_POST['old_password'];
+
+    $stmt = $conn->prepare("SELECT password FROM userdata WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($hashedPassword);
+        $stmt->fetch();
+        $stmt->close();
+        if (!password_verify($oldPassword, $hashedPassword)) {
+            $message = "L'ancien mot de passe est incorrect.";
+            return;
+        }
+    } else {
+        $message = "Aucun utilisateur trouve avec cette adresse email.";
+        return;
+    }
+
     if ($password === $confirmPassword) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -38,6 +60,7 @@ require __DIR__ . '/../../templates/header.php';
 
     <form action="resetpassword" method="post">
         <input type="email" name="email" placeholder="Votre Email" required>
+        <input type="password" name="old_password" placeholder="Ancien mot de passe" required>
         <input type="password" name="password" placeholder="Nouveau mot de passe" required>
         <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" required>
         <button type="submit">Réinitialiser</button>
