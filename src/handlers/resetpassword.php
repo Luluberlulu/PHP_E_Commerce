@@ -23,14 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->fetch();
         $stmt->close();
         if (!password_verify($oldPassword, $hashedPassword)) {
-            $message = "L'ancien mot de passe est incorrect.";
-            return;
+            $message = "mot de passe est incorrect.";
         }
     } else {
         $message = "Aucun utilisateur trouve avec cette adresse email.";
-        return;
     }
-
+    
     if ($password === $confirmPassword) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
