@@ -18,7 +18,8 @@ $routes = [
     '/logout'   => 'logout.php',
     '/profil'   => 'profil.php',
     '/resetpassword' => 'resetpassword.php',
-    '/update_profile' => 'update_profile.php'
+    '/update_profile' => 'update_profile.php',
+    '/sell' => 'sell.php'
 ];
 
 //vérifie si route existe

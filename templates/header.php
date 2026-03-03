@@ -26,6 +26,7 @@ $_SESSION['role'] = $_SESSION['role'] ?? 'guest';
                 <li><a href="register">Inscription</a></li>
                 <li><a href="logout">Deconnexion</a></li>
                 <li><a href="profil">Profil</a></li>
+                <li><a href="sell">Vendre</a></li>
             </ul>
         </nav>
     </header>
