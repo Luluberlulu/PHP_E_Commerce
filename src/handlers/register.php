@@ -35,8 +35,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
             $stmt->bind_param("sss", $username, $email, $hashedPassword);
             //si tout vas bien execute query et envoi login
             if ($stmt->execute()) {
+                $_SESSION['balance'] = 0;
+                $_SESSION['PP'] = "default.png";
+                $_SESSION['role'] = "user";
                 $_SESSION['email'] = $email;
                 $_SESSION['username'] = $username;
+
+                $stmt = $conn->prepare("SELECT id FROM userdata WHERE email = ?");
+                $stmt->bind_param("s", $email);
+                $stmt->execute();
+                $stmt->store_result();
+                $stmt->bind_result($id);
+                $stmt->fetch();
+
+                $_SESSION['user_id'] = $id;
+                    
             header("Location: home");
             exit();
             } else {

@@ -1,4 +1,8 @@
 <?php
+// Activation des erreurs pour le debug
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 //remplace index.php par la bonne route grâce au switch + escape les char chelous
 $base_path = str_replace('/index.php', '', $_SERVER['SCRIPT_NAME']);
@@ -13,7 +17,8 @@ $routes = [
     '/register' => 'register.php',
     '/logout'   => 'logout.php',
     '/profil'   => 'profil.php',
-    '/resetpassword' => 'resetpassword.php'
+    '/resetpassword' => 'resetpassword.php',
+    '/update_profile' => 'update_profile.php'
 ];
 
 //vérifie si route existe
