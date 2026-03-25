@@ -75,11 +75,11 @@ Une fois connecte avec ce compte, le lien Admin apparait dans la navigation.
 ```
 PHP_E_Commerce/
   css/
-    style.css              # Feuille de style globale
+    style.css              # feuille de style pour le style stylisée qu'est le site
   src/
     database/
       db_connection.php    # Connexion MySQL
-      db.sql               # Schema et donnees initiales
+      db.sql               # Schema et donnees initiales à importé dans la db
     handlers/
       home.php             # Accueil avec recherche
       login.php
@@ -107,6 +107,6 @@ PHP_E_Commerce/
 ## Notes techniques
 
 - Toutes les requetes SQL utilisent des requetes preparees pour eviter les injections SQL.
-- Les transactions MySQL sont utilisees pour les operations critiques (vente, achat, mise a jour de stock).
+- Les transactions MySQL sont utilisees pour les operations critiques.
 - La gestion du stock utilise `ON DUPLICATE KEY UPDATE` pour eviter les doublons dans la table `stock`.
-- Les images des articles sont stockees en base de donnees sous forme de blob (LONGBLOB).
+- Les images des articles sont stockees en base de donnees sous forme de blob.
